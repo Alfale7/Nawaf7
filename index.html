@@ -240,7 +240,9 @@ body {
     <script>
         function toggleFileInput(id) {
             const fileInput = document.getElementById(id);
-            fileInput.click();
+            if (fileInput) {
+                fileInput.click();
+            }
         }
 
         function displayImage(event, id) {
@@ -248,37 +250,55 @@ body {
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function (e) {
-                    const img = document.querySelector(#${id} img);
-                    img.src = e.target.result;
-                    img.parentElement.classList.add('active');
+                    const img = document.querySelector(`#${id} img`);
+                    if (img) {
+                        img.src = e.target.result;
+                        img.parentElement.classList.add('active');
+                    }
                 };
                 reader.readAsDataURL(file);
             }
-        }function downloadAsImage() {
-    const container = document.querySelector('.container');
-    const originalStyles = container.style.cssText;
+        }
 
-    // ضبط الحاوية لمقاسات ثابتة أثناء الالتقاط
-    container.style.width = '800px'; // عرض ثابت
-    container.style.fontSize = '14px'; // حجم نص موحد
-    container.style.lineHeight = '1.5'; // تحسين التباعد بين الأسطر
-    container.style.transform = 'scale(1)'; // إلغاء أي تحجيم سابق
-    container.style.transformOrigin = 'top left';
+        function downloadAsImage() {
+            const container = document.querySelector('.container');
+            if (!container) {
+                alert('العنصر غير موجود');
+                return;
+            }
 
-    html2canvas(container, {
-        scale: 3, // رفع الدقة
-        useCORS: true,
-        backgroundColor: null,
-    }).then((canvas) => {
-        const link = document.createElement('a');
-        link.download = 'report.png';
-        link.href = canvas.toDataURL('image/png');
-        link.click();
+            const originalStyles = container.style.cssText;
 
-        // إعادة الحاوية إلى التنسيق الأصلي
-        container.style.cssText = originalStyles;
-    });
-}
+            // ضبط الحاوية لمقاسات ثابتة أثناء الالتقاط
+            container.style.width = '800px';
+            container.style.fontSize = '14px';
+            container.style.lineHeight = '1.5';
+            container.style.transform = 'scale(1)';
+            container.style.transformOrigin = 'top left';
+
+            html2canvas(container, {
+                scale: 3, // رفع الدقة
+                useCORS: true,
+                backgroundColor: null,
+            }).then((canvas) => {
+                const link = document.createElement('a');
+                link.download = 'report.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+
+                // إعادة الحاوية إلى التنسيق الأصلي
+                container.style.cssText = originalStyles;
+            }).catch((error) => {
+                console.error('خطأ أثناء إنشاء الصورة:', error);
+            });
+        }
+
+        function updateRegion() {
+            const regionInput = document.getElementById('regionInput');
+            if (regionInput) {
+                regionInput.placeholder = regionInput.value || 'أدخل منطقتك هنا';
+            }
+        }
     </script>
 </head>
 <body>
@@ -297,13 +317,6 @@ body {
     </div>
     <img src="logo.png" alt="شعار وزارة التعليم" class="logo">
 </div>
-
-<script>
-    function updateRegion() {
-        const regionInput = document.getElementById('regionInput');
-        regionInput.placeholder = regionInput.value || 'أدخل منطقتك هنا';
-    }
-</script>
 
         <div class="fields">
             <div class="field">
