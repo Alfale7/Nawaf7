@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>معد التقارير</title>
+    <title>تقرير</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -252,15 +252,22 @@
             }
         }
 
-        function downloadAsImage() {
-            const container = document.querySelector('.container');
-            html2canvas(container).then((canvas) => {
-                const link = document.createElement('a');
-                link.download = 'report.png';
-                link.href = canvas.toDataURL('image/png');
-                link.click();
-            });
-        }
+      function downloadAsImage() {
+    const container = document.querySelector('.container');
+    
+    // تعديل حجم النص قبل الالتقاط
+    container.style.fontSize = '0.9em';
+
+   html2canvas(container).then((canvas) => {
+        const link = document.createElement('a');
+        link.download = 'report.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        
+        // إعادة حجم النص إلى الوضع الطبيعي
+        container.style.fontSize = '';
+    });
+}
     </script>
 </head>
 <body>
