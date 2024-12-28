@@ -90,6 +90,7 @@
             border: 1px solid #46b39d;
             border-radius: 5px;
             font-size: 0.85em;
+            font-weight: normal;
             transition: border-color 0.3s, box-shadow 0.3s;
             box-sizing: border-box;
             box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -133,32 +134,18 @@
             cursor: pointer;
             position: relative;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
         }
         .shahid img {
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 5px;
+            max-width: 100%;
+            max-height: 85%;
             object-fit: cover;
-            margin: auto;
         }
         .shahid input[type="file"] {
             display: none;
         }
-        .shahid::before {
-            content: attr(data-index);
-            position: absolute;
-            top: -10px;
-            background: #103d5e;
-            color: #fff;
-            width: 25px;
-            height: 25px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-            font-size: 0.9em;
-            font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        .shahid.active {
+            border: 2px solid #103d5e;
         }
         .buttons {
             grid-column: span 2;
@@ -310,19 +297,19 @@
         <div class="shahid-section">
             <h3>الشواهد ⤵️</h3>
             <div class="shahid-grid">
-                <div id="shahid1" class="shahid" data-index="1" onclick="toggleFileInput('shahid1Input')">
+                <div id="shahid1" class="shahid" onclick="toggleFileInput('shahid1Input')">
                     <input type="file" id="shahid1Input" accept="image/*" onchange="displayImage(event, 'shahid1')">
                     <img src="" alt="">
                 </div>
-                <div id="shahid2" class="shahid" data-index="2" onclick="toggleFileInput('shahid2Input')">
+                <div id="shahid2" class="shahid" onclick="toggleFileInput('shahid2Input')">
                     <input type="file" id="shahid2Input" accept="image/*" onchange="displayImage(event, 'shahid2')">
                     <img src="" alt="">
                 </div>
-                <div id="shahid3" class="shahid" data-index="3" onclick="toggleFileInput('shahid3Input')">
+                <div id="shahid3" class="shahid" onclick="toggleFileInput('shahid3Input')">
                     <input type="file" id="shahid3Input" accept="image/*" onchange="displayImage(event, 'shahid3')">
                     <img src="" alt="">
                 </div>
-                <div id="shahid4" class="shahid" data-index="4" onclick="toggleFileInput('shahid4Input')">
+                <div id="shahid4" class="shahid" onclick="toggleFileInput('shahid4Input')">
                     <input type="file" id="shahid4Input" accept="image/*" onchange="displayImage(event, 'shahid4')">
                     <img src="" alt="">
                 </div>
@@ -335,7 +322,8 @@
 
         <div class="footer">
             <span class="programmer">برمجة المعلم صلاح خليفة الفالح</span>
-            <span class="manager">مدير المدرسة حمد فريح المعيقل</span>
+            <span class="manager">مدير 
+المدرسة حمد فريح المعيقل</span>
         </div>
     </div>
 </body>
