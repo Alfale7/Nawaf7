@@ -43,24 +43,6 @@
             text-align: right;
             line-height: 1.5;
             font-size: 1em;
-            display: flex;
-            flex-direction: column;
-        }
-        .header .text span {
-            margin-bottom: 5px;
-        }
-        .header .text input {
-            border: none;
-            border-bottom: 1px solid #fff;
-            background: transparent;
-            color: #fff;
-            font-size: 1em;
-            text-align: center;
-            outline: none;
-            width: 100px;
-        }
-        .header .text input::placeholder {
-            color: #ddd;
         }
         .header .logo {
             width: 120px;
@@ -90,7 +72,6 @@
             border: 1px solid #46b39d;
             border-radius: 5px;
             font-size: 0.85em;
-            font-weight: normal;
             transition: border-color 0.3s, box-shadow 0.3s;
             box-sizing: border-box;
             box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -134,18 +115,16 @@
             cursor: pointer;
             position: relative;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-            overflow: hidden;
         }
         .shahid img {
-            max-width: 100%;
-            max-height: 100%;
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 5px;
             object-fit: cover;
+            margin: auto;
         }
         .shahid input[type="file"] {
             display: none;
-        }
-        .shahid.active {
-            border: 2px solid #103d5e;
         }
         .buttons {
             grid-column: span 2;
@@ -242,10 +221,7 @@
 
         function downloadAsImage() {
             const container = document.querySelector('.container');
-            html2canvas(container, {
-                scale: 2,
-                useCORS: true
-            }).then((canvas) => {
+            html2canvas(container).then((canvas) => {
                 const link = document.createElement('a');
                 link.download = 'report.png';
                 link.href = canvas.toDataURL('image/png');
@@ -256,14 +232,14 @@
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <div class="text">
-                <span>وزارة التربية والتعليم</span>
-                <span>الإدارة العامة للتعليم</span>
-                <span>مكتب التعليم بمنطقة <input type="text" placeholder="..." id="region"></span>
-            </div>
-            <img src="logo.png" alt="شعار وزارة التعليم" class="logo">
-        </div>
+     <div class="header">
+    <div class="text">
+        وزارة التربية والتعليم<br>
+        الإدارة العامة للتعليم<br>
+        مكتب التعليم بمنطقة <input type="text" placeholder="اسم المنطقة" class="header-input">
+    </div>
+    <img src="logo.png" alt="شعار وزارة التعليم" class="logo">
+</div>
 
         <div class="fields">
             <div class="field">
@@ -298,7 +274,7 @@
         </div>
 
         <div class="shahid-section">
-            <h3>الشواهد</h3>
+            <h3>الشواهد ⤵️</h3>
             <div class="shahid-grid">
                 <div id="shahid1" class="shahid" onclick="toggleFileInput('shahid1Input')">
                     <input type="file" id="shahid1Input" accept="image/*" onchange="displayImage(event, 'shahid1')">
@@ -324,8 +300,8 @@
         </div>
 
         <div class="footer">
-            <span class="programmer">برمجة: المعلم صلاح خليفة الفالح</span>
-            <span class="manager">مدير المدرسة: حمد فريح المعيقل</span>
+            <span class="programmer">برمجة المعلم صلاح خليفة الفالح</span>
+            <span class="manager">مدير المدرسة حمد فريح المعيقل</span>
         </div>
     </div>
 </body>
