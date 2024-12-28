@@ -198,22 +198,6 @@
             align-self: flex-end;
         }
 
-    @media print {
-        body {
-            zoom: 0.8; /* تقليل الحجم للطباعة */
-        }
-        .container {
-            font-size: 12px !important; /* تقليل حجم النص */
-            width: 100% !important;
-        }
-        .field input, .field textarea {
-            font-size: 11px !important; /* تقليل خط الحقول */
-        }
-        .header, .footer {
-            font-size: 12px !important;
-        }
-    }
-
         @media (max-width: 600px) {
             .container {
                 grid-template-columns: 1fr;
@@ -266,25 +250,29 @@
                 };
                 reader.readAsDataURL(file);
             }
-        }
-function downloadAsImage() {
+        }function downloadAsImage() {
     const container = document.querySelector('.container');
-    
-    // تطبيق أسلوب الطباعة
-    document.body.classList.add('print-style');
+    const originalStyles = container.style.cssText;
+
+    // ضبط الحاوية لمقاسات ثابتة أثناء الالتقاط
+    container.style.width = '800px'; // عرض ثابت
+    container.style.fontSize = '14px'; // حجم نص موحد
+    container.style.lineHeight = '1.5'; // تحسين التباعد بين الأسطر
+    container.style.transform = 'scale(1)'; // إلغاء أي تحجيم سابق
+    container.style.transformOrigin = 'top left';
 
     html2canvas(container, {
-        scale: 3,
+        scale: 3, // رفع الدقة
         useCORS: true,
-        backgroundColor: null
+        backgroundColor: null,
     }).then((canvas) => {
         const link = document.createElement('a');
         link.download = 'report.png';
         link.href = canvas.toDataURL('image/png');
         link.click();
-        
-        // إزالة أسلوب الطباعة
-        document.body.classList.remove('print-style');
+
+        // إعادة الحاوية إلى التنسيق الأصلي
+        container.style.cssText = originalStyles;
     });
 }
     </script>
