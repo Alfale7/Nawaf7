@@ -74,19 +74,20 @@ body {
             color: #103d5e;
         }
 
-
 .field input, .field textarea {
-    font-family: Arial, sans-serif; /* نفس الخط للجميع */
-    font-weight: normal; /* لإزالة العريض */
+    font-family: Arial, sans-serif;
+    font-weight: normal;
     width: 100%;
     padding: 6px;
     border: 1px solid #46b39d;
     border-radius: 5px;
     font-size: 0.85em;
-    transition: border-color 0.3s, box-shadow 0.3s;
     box-sizing: border-box;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: visible; /* ضمان ظهور النص بالكامل */
+    white-space: nowrap; /* منع كسر النصوص الطويلة */
 }
+
 
         .field input:focus, .field textarea:focus {
             border-color: #103d5e;
@@ -261,37 +262,45 @@ body {
         }
 
         function downloadAsImage() {
-            const container = document.querySelector('.container');
-            if (!container) {
-                alert('العنصر غير موجود');
-                return;
-            }
+    const container = document.querySelector('.container');
+    if (!container) {
+        alert('العنصر غير موجود');
+        return;
+    }
 
-            const originalStyles = container.style.cssText;
+    const originalStyles = container.style.cssText;
 
-            // ضبط الحاوية لمقاسات ثابتة أثناء الالتقاط
-            container.style.width = '800px';
-            container.style.fontSize = '14px';
-            container.style.lineHeight = '1.5';
-            container.style.transform = 'scale(1)';
-            container.style.transformOrigin = 'top left';
+    // ضبط التنسيقات
+    container.style.width = '800px';
+    container.style.fontSize = '14px';
+    container.style.lineHeight = '1.5';
+    container.style.transform = 'scale(1)';
+    container.style.transformOrigin = 'top left';
 
-            html2canvas(container, {
-                scale: 3, // رفع الدقة
-                useCORS: true,
-                backgroundColor: null,
-            }).then((canvas) => {
-                const link = document.createElement('a');
-                link.download = 'report.png';
-                link.href = canvas.toDataURL('image/png');
-                link.click();
+    // إضافة ضمان لظهور النصوص داخل الحقول
+    const inputs = container.querySelectorAll('input, textarea');
+    inputs.forEach(input => {
+        input.style.overflow = 'visible';
+        input.style.whiteSpace = 'nowrap';
+    });
 
-                // إعادة الحاوية إلى التنسيق الأصلي
-                container.style.cssText = originalStyles;
-            }).catch((error) => {
-                console.error('خطأ أثناء إنشاء الصورة:', error);
-            });
-        }
+    html2canvas(container, {
+        scale: 3, // رفع الدقة
+        useCORS: true,
+        backgroundColor: null,
+    }).then((canvas) => {
+        const link = document.createElement('a');
+        link.download = 'report.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+
+        // إعادة التنسيقات الأصلية
+        container.style.cssText = originalStyles;
+    }).catch((error) => {
+        console.error('خطأ أثناء إنشاء الصورة:', error);
+    });
+}
+
 
         function updateRegion() {
             const regionInput = document.getElementById('regionInput');
