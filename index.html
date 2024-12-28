@@ -253,23 +253,19 @@
         }
 function downloadAsImage() {
     const container = document.querySelector('.container');
-
-    // تطبيق تعديلات على الحاوية لتصغير النصوص
-    container.style.transform = 'scale(0.8)';
-    container.style.transformOrigin = 'top left';
-    container.style.width = '125%'; // لتعويض التصغير
-    container.style.fontSize = '14px'; // تقليل حجم النصوص
-
-    html2canvas(container, { scale: 2 }).then((canvas) => {
+    
+    // إعدادات html2canvas لتحسين الجودة
+    html2canvas(container, {
+        scale: 3, // زيادة دقة الصورة
+        useCORS: true, // السماح بتحميل الموارد الخارجية إذا لزم الأمر
+        backgroundColor: null, // الحفاظ على الخلفية الشفافة
+        width: container.offsetWidth,
+        height: container.offsetHeight
+    }).then((canvas) => {
         const link = document.createElement('a');
         link.download = 'report.png';
         link.href = canvas.toDataURL('image/png');
         link.click();
-
-        // إعادة الحاوية إلى وضعها الطبيعي
-        container.style.transform = '';
-        container.style.width = '';
-        container.style.fontSize = '';
     });
 }
     </script>
