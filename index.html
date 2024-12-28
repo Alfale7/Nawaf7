@@ -75,8 +75,8 @@ body {
         }
 
 .field input, .field textarea {
-    font-family: Arial, sans-serif;
-    font-weight: normal;
+    font-family: Arial, sans-serif; /* خط موحد يدعم النصوص العربية والإنجليزية */
+    font-weight: normal; /* إزالة العريض */
     width: 100%;
     padding: 6px;
     border: 1px solid #46b39d;
@@ -84,10 +84,10 @@ body {
     font-size: 0.85em;
     box-sizing: border-box;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
-    overflow: visible; /* ضمان ظهور النص بالكامل */
+    overflow: visible; /* لضمان ظهور النصوص بشكل كامل */
     white-space: nowrap; /* منع كسر النصوص الطويلة */
+    text-align: center; /* ضمان التوسيط */
 }
-
 
         .field input:focus, .field textarea:focus {
             border-color: #103d5e;
@@ -261,7 +261,7 @@ body {
             }
         }
 
-        function downloadAsImage() {
+    function downloadAsImage() {
     const container = document.querySelector('.container');
     if (!container) {
         alert('العنصر غير موجود');
@@ -277,15 +277,16 @@ body {
     container.style.transform = 'scale(1)';
     container.style.transformOrigin = 'top left';
 
-    // إضافة ضمان لظهور النصوص داخل الحقول
+    // معالجة النصوص داخل الحقول
     const inputs = container.querySelectorAll('input, textarea');
     inputs.forEach(input => {
         input.style.overflow = 'visible';
         input.style.whiteSpace = 'nowrap';
+        input.style.textAlign = 'center'; // ضمان التوسيط
     });
 
     html2canvas(container, {
-        scale: 3, // رفع الدقة
+        scale: 3, // تحسين الدقة
         useCORS: true,
         backgroundColor: null,
     }).then((canvas) => {
@@ -300,6 +301,7 @@ body {
         console.error('خطأ أثناء إنشاء الصورة:', error);
     });
 }
+
 
 
         function updateRegion() {
