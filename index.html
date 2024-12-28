@@ -198,6 +198,22 @@
             align-self: flex-end;
         }
 
+    @media print {
+        body {
+            zoom: 0.8; /* تقليل الحجم للطباعة */
+        }
+        .container {
+            font-size: 12px !important; /* تقليل حجم النص */
+            width: 100% !important;
+        }
+        .field input, .field textarea {
+            font-size: 11px !important; /* تقليل خط الحقول */
+        }
+        .header, .footer {
+            font-size: 12px !important;
+        }
+    }
+
         @media (max-width: 600px) {
             .container {
                 grid-template-columns: 1fr;
@@ -254,18 +270,21 @@
 function downloadAsImage() {
     const container = document.querySelector('.container');
     
-    // إعدادات html2canvas لتحسين الجودة
+    // تطبيق أسلوب الطباعة
+    document.body.classList.add('print-style');
+
     html2canvas(container, {
-        scale: 3, // زيادة دقة الصورة
-        useCORS: true, // السماح بتحميل الموارد الخارجية إذا لزم الأمر
-        backgroundColor: null, // الحفاظ على الخلفية الشفافة
-        width: container.offsetWidth,
-        height: container.offsetHeight
+        scale: 3,
+        useCORS: true,
+        backgroundColor: null
     }).then((canvas) => {
         const link = document.createElement('a');
         link.download = 'report.png';
         link.href = canvas.toDataURL('image/png');
         link.click();
+        
+        // إزالة أسلوب الطباعة
+        document.body.classList.remove('print-style');
     });
 }
     </script>
