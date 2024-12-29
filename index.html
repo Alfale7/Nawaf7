@@ -138,13 +138,14 @@ body {
             cursor: pointer;
             position: relative;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            overflow: hidden; /* لضمان عدم قص المحتوى */
         }
 
         .shahid img {
-            max-width: 90%;
-            max-height: 90%;
+            max-width: 100%; /* ضمان أن الصور تتناسب مع المساحة */
+            max-height: 100%;
+            object-fit: contain; /* تكييف الصورة بدون قص */
             border-radius: 5px;
-            object-fit: cover;
             margin: auto;
         }
 
@@ -226,7 +227,7 @@ body {
             }
 
             .shahid {
-                height: 120px;
+                height: auto; /* السماح للارتفاع بالتكيف مع المحتوى */
             }
 
             .footer {
