@@ -83,9 +83,12 @@ body {
     border-radius: 5px;
     font-size: 0.85em;
     box-sizing: border-box;
-    text-align: right; /*  محاذاة النصوص إلى اليمين  */
-    overflow: hidden; /* منع التجاوز */
+    text-align: right; /* لضمان محاذاة النصوص لليمين افتراضيًا */
+    direction: rtl; /* الاتجاه الافتراضي للنصوص العربية */
+    overflow: hidden; /* منع تجاوز النصوص */
+    white-space: nowrap; /* منع كسر النصوص الطويلة */
 }
+
 
 
 
@@ -280,10 +283,14 @@ function downloadAsImage() {
         textSpan.style.fontFamily = window.getComputedStyle(input).fontFamily;
         textSpan.style.lineHeight = window.getComputedStyle(input).lineHeight;
         textSpan.style.textAlign = window.getComputedStyle(input).textAlign;
+        textSpan.style.direction = window.getComputedStyle(input).direction;
+        textSpan.style.padding = window.getComputedStyle(input).padding;
+        textSpan.style.whiteSpace = 'pre-wrap'; // للسماح بالنصوص الطويلة بالظهور على عدة أسطر
+        textSpan.style.wordWrap = 'break-word'; // منع تجاوز النصوص حدود الحقل
         textSpan.style.color = '#000';
         textSpan.style.display = 'flex';
         textSpan.style.alignItems = 'center';
-        textSpan.style.justifyContent = 'center';
+        textSpan.style.justifyContent = input.style.textAlign === 'right' ? 'flex-start' : 'flex-end';
         textSpan.textContent = input.value; // نص الحقل
         textSpan.className = 'temp-span'; // لتحديد العناصر المؤقتة لاحقًا
         container.appendChild(textSpan);
