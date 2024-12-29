@@ -4,29 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تقرير</title>
+
     <style>
-/* استيراد الخط العربي من Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400&display=swap');
+        /* استيراد الخط العربي من Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400&display=swap');
 
-/* تطبيق الخط الجديد */
-body, .field input, .field textarea {
-    font-family: 'Noto Sans Arabic', Arial, sans-serif; /* خط يدعم النصوص العربية */
-    font-weight: normal;
-    text-align: right; /* محاذاة النصوص لليمين */
-    direction: rtl; /* اتجاه النصوص العربية */
-}
-
-<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
-<script>
-    WebFont.load({
-        google: {
-            families: ['Noto Sans Arabic:wght@400'] /* تحميل الخط العربي */
-        },
-        active: function () {
-            console.log('تم تحميل الخط بنجاح');
+        /* تطبيق الخط الجديد */
+        body, .field input, .field textarea {
+            font-family: 'Noto Sans Arabic', Arial, sans-serif; /* خط يدعم النصوص العربية */
+            font-weight: normal;
+            text-align: right; /* محاذاة النصوص لليمين */
+            direction: rtl; /* اتجاه النصوص العربية */
         }
-    });
-</script>
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+    <script>
+        WebFont.load({
+            google: {
+                families: ['Noto Sans Arabic:wght@400'] /* تحميل الخط العربي */
+            },
+            active: function () {
+                console.log('تم تحميل الخط بنجاح'); /* تأكيد تحميل الخط */
+            }
+        });
+    </script>
+</head>
+<body>
+    <!-- محتوى التقرير هنا -->
+</body>
+</html>
+
 
 
         
