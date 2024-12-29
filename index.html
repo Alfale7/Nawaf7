@@ -5,14 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تقرير</title>
     <style>
-body {
-    font-family: Arial, sans-serif; /* أضف خطًا يدعم العربية إذا لزم الأمر */
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    background: linear-gradient(to bottom, #e6f7ff, #cceeff);
+/* تطبيق الخط الجديد */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400&display=swap');
+
+/* إعدادات الخط */
+body, .field input, .field textarea {
+    font-family: 'Noto Sans Arabic', Arial, sans-serif; /* خط يدعم العربية */
+    font-weight: normal;
+    text-align: right; /* محاذاة النصوص لليمين */
+    direction: rtl; /* اتجاه النصوص العربية */
 }
 
+
+        
         .container {
             width: 90%;
             max-width: 1200px;
