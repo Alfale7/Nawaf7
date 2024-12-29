@@ -286,18 +286,18 @@ function downloadAsImage() {
         textSpan.style.width = `${input.offsetWidth}px`;
         textSpan.style.height = `${input.offsetHeight}px`;
         textSpan.style.fontSize = window.getComputedStyle(input).fontSize;
-        textSpan.style.fontFamily = window.getComputedStyle(input).fontFamily;
+        textSpan.style.fontFamily = `'Noto Sans Arabic', Arial, sans-serif`; // تطبيق الخط الجديد
         textSpan.style.lineHeight = window.getComputedStyle(input).lineHeight;
         textSpan.style.color = '#000';
         textSpan.style.textAlign = 'right'; // إجبار النصوص على محاذاة اليمين
-        textSpan.style.direction = 'rtl'; // لضمان اتجاه النصوص العربية
-        textSpan.style.whiteSpace = 'pre-wrap'; // للسماح بالنصوص الطويلة بالظهور على عدة أسطر
-        textSpan.style.wordWrap = 'break-word'; // منع تجاوز النصوص حدود الحقل
+        textSpan.style.direction = 'rtl'; // دعم النصوص العربية
+        textSpan.style.whiteSpace = 'pre-wrap'; // السماح بالنصوص الطويلة
+        textSpan.style.wordWrap = 'break-word'; // منع تجاوز النصوص
         textSpan.style.display = 'flex';
         textSpan.style.alignItems = 'center';
-        textSpan.style.justifyContent = 'flex-start'; // لضمان أن النص يظهر في اليمين
-        textSpan.textContent = input.value; // نسخ النص المكتوب في الحقل
-        textSpan.className = 'temp-span'; // لتحديد العناصر المؤقتة لاحقًا
+        textSpan.style.justifyContent = 'flex-start';
+        textSpan.textContent = input.value;
+        textSpan.className = 'temp-span';
         container.appendChild(textSpan);
     });
 
@@ -323,6 +323,7 @@ function downloadAsImage() {
         console.error('خطأ أثناء إنشاء الصورة:', error);
     });
 }
+
 
 
         function updateRegion() {
