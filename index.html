@@ -238,6 +238,7 @@ body {
 
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <script>
         function toggleFileInput(id) {
             const fileInput = document.getElementById(id);
@@ -313,6 +314,24 @@ body {
     });
 }
 
+
+        function downloadAsPDF() {
+            const { jsPDF } = window.jspdf;
+            const container = document.querySelector('.container');
+            if (!container) {
+                alert('العنصر غير موجود');
+                return;
+            }
+
+            html2canvas(container).then((canvas) => {
+                const pdf = new jsPDF();
+                const imgData = canvas.toDataURL('image/png');
+                const imgWidth = 190; // العرض داخل PDF
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                pdf.addImage(imgData, 'PNG', 10, 10, imgWidth, imgHeight);
+                pdf.save('report.pdf');
+            });
+        }
 
         function updateRegion() {
             const regionInput = document.getElementById('regionInput');
@@ -395,6 +414,7 @@ body {
 
         <div class="buttons">
             <button class="download" onclick="downloadAsImage()">تحميل مباشر</button>
+            <button class="download" onclick="downloadAsPDF()">تحميل PDF</button>
         </div>
 
         <div class="footer">
