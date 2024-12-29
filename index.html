@@ -74,24 +74,23 @@ body {
             color: #103d5e;
         }
 
+        .field input, .field textarea {
+            font-family: Arial, sans-serif;
+            font-weight: normal;
+            width: 100%;
+            padding: 8px; /* زيادة حجم الحشو لضمان ظهور النصوص كاملة */
+            border: 1px solid #46b39d;
+            border-radius: 5px;
+            font-size: 1em; /* زيادة حجم النص لضمان وضوحه */
+            box-sizing: border-box;
+            text-align: right; /* محاذاة النص لليمين */
+            overflow: hidden;
+        }
 
-.field input, .field textarea {
-    font-family: Arial, sans-serif;
-    font-weight: normal;
-    width: 100%;
-    padding: 6px;
-    border: 1px solid #46b39d;
-    border-radius: 5px;
-    font-size: 0.85em;
-    box-sizing: border-box;
-    text-align: center; /* توسيط النصوص */
-    overflow: hidden; /* منع التجاوز */
-}
-
-.field input.no-border, .field textarea.no-border {
-    border: none !important;
-    box-shadow: none !important;
-}
+        .field input.no-border, .field textarea.no-border {
+            border: none !important;
+            box-shadow: none !important;
+        }
 
         .field input:focus, .field textarea:focus {
             border-color: #103d5e;
