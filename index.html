@@ -83,10 +83,10 @@ body {
     border-radius: 5px;
     font-size: 0.85em;
     box-sizing: border-box;
-    text-align: right; /* لضمان محاذاة النصوص لليمين افتراضيًا */
-    direction: rtl; /* الاتجاه الافتراضي للنصوص العربية */
-    overflow: hidden; /* منع تجاوز النصوص */
-    white-space: nowrap; /* منع كسر النصوص الطويلة */
+    text-align: right; /* لضمان محاذاة النصوص لليمين داخل الحقول */
+    direction: rtl; /* لضمان اتجاه النصوص العربية */
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 
@@ -270,7 +270,7 @@ function downloadAsImage() {
         return;
     }
 
-    // نسخ النصوص من الحقول إلى عناصر نصية
+    // نسخ النصوص من الحقول إلى عناصر نصوص مؤقتة بمحاذاة اليمين
     const inputs = container.querySelectorAll('input, textarea');
     inputs.forEach(input => {
         const textSpan = document.createElement('span');
@@ -282,15 +282,12 @@ function downloadAsImage() {
         textSpan.style.fontSize = window.getComputedStyle(input).fontSize;
         textSpan.style.fontFamily = window.getComputedStyle(input).fontFamily;
         textSpan.style.lineHeight = window.getComputedStyle(input).lineHeight;
-        textSpan.style.textAlign = window.getComputedStyle(input).textAlign;
-        textSpan.style.direction = window.getComputedStyle(input).direction;
-        textSpan.style.padding = window.getComputedStyle(input).padding;
-        textSpan.style.whiteSpace = 'pre-wrap'; // للسماح بالنصوص الطويلة بالظهور على عدة أسطر
-        textSpan.style.wordWrap = 'break-word'; // منع تجاوز النصوص حدود الحقل
+        textSpan.style.textAlign = 'right'; // إجبار النصوص على المحاذاة لليمين
+        textSpan.style.direction = 'rtl'; // لضمان عرض النصوص العربية بشكل صحيح
         textSpan.style.color = '#000';
         textSpan.style.display = 'flex';
         textSpan.style.alignItems = 'center';
-        textSpan.style.justifyContent = input.style.textAlign === 'right' ? 'flex-start' : 'flex-end';
+        textSpan.style.justifyContent = 'flex-end'; // لضمان أن النص يظهر في اليمين
         textSpan.textContent = input.value; // نص الحقل
         textSpan.className = 'temp-span'; // لتحديد العناصر المؤقتة لاحقًا
         container.appendChild(textSpan);
@@ -318,8 +315,6 @@ function downloadAsImage() {
         console.error('خطأ أثناء إنشاء الصورة:', error);
     });
 }
-
-
 
         function updateRegion() {
             const regionInput = document.getElementById('regionInput');
