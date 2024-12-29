@@ -88,6 +88,10 @@ body {
     overflow: hidden; /* منع التجاوز */
 }
 
+.field input.no-border, .field textarea.no-border {
+    border: none !important;
+    box-shadow: none !important;
+}
 
         .field input:focus, .field textarea:focus {
             border-color: #103d5e;
@@ -323,6 +327,10 @@ body {
                 return;
             }
 
+            // إزالة الحدود قبل الطباعة
+            const inputs = container.querySelectorAll('input, textarea');
+            inputs.forEach(input => input.classList.add('no-border'));
+
             html2canvas(container).then((canvas) => {
                 const pdf = new jsPDF();
                 const imgData = canvas.toDataURL('image/png');
@@ -330,6 +338,9 @@ body {
                 const imgHeight = (canvas.height * imgWidth) / canvas.width;
                 pdf.addImage(imgData, 'PNG', 10, 10, imgWidth, imgHeight);
                 pdf.save('report.pdf');
+
+                // إعادة الحدود بعد الطباعة
+                inputs.forEach(input => input.classList.remove('no-border'));
             });
         }
 
