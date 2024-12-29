@@ -90,6 +90,7 @@ body {
         .field input.no-border, .field textarea.no-border {
             border: none !important;
             box-shadow: none !important;
+            text-align: right !important; /* لضمان محاذاة النص عند الطباعة */
         }
 
         .field input:focus, .field textarea:focus {
@@ -142,7 +143,7 @@ body {
         }
 
         .shahid img {
-            max-width: 90%; /* إعادة الشواهد لحجمها الطبيعي */
+            max-width: 90%;
             max-height: 90%;
             object-fit: contain; /* تكييف الصورة بدون قص */
             border-radius: 5px;
@@ -285,11 +286,11 @@ body {
         textSpan.style.fontSize = window.getComputedStyle(input).fontSize;
         textSpan.style.fontFamily = window.getComputedStyle(input).fontFamily;
         textSpan.style.lineHeight = window.getComputedStyle(input).lineHeight;
-        textSpan.style.textAlign = window.getComputedStyle(input).textAlign;
+        textSpan.style.textAlign = "right"; // محاذاة النص لليمين
         textSpan.style.color = '#000';
         textSpan.style.display = 'flex';
         textSpan.style.alignItems = 'center';
-        textSpan.style.justifyContent = 'center';
+        textSpan.style.justifyContent = 'flex-start'; // ضمان المحاذاة لليمين
         textSpan.textContent = input.value; // نص الحقل
         textSpan.className = 'temp-span'; // لتحديد العناصر المؤقتة لاحقًا
         container.appendChild(textSpan);
